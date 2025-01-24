@@ -31,7 +31,14 @@ public class char_movement : MonoBehaviour
     {
         Vector3 moveVelocity = (cam.transform.right * moveInput.x + cam.transform.forward * moveInput.y + Vector3.down*gravity) * Time.deltaTime * moveSpeed;
         controller.Move(moveVelocity);
+        moveVelocity.y = 0;
+        Rotate(moveVelocity);
         
+    }
+
+    private void Rotate(Vector3 target)
+    {
+        transform.LookAt(transform.position + target);
     }
 
     public void GetMoveInput(InputAction.CallbackContext context)
