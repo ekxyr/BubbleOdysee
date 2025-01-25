@@ -16,7 +16,11 @@ public class char_movement : MonoBehaviour
     private Vector2 moveInput;
     [SerializeField] private float dashForce;
     [SerializeField] private float moveSpeed;
-    [SerializeField] private float jumpForce;
+    [SerializeField] private float initialJumpForce;
+    private float jumpForce;
+
+    private int countScore = 0;
+
 
 
     //SOUND 
@@ -42,6 +46,10 @@ public class char_movement : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        jumpForce = initialJumpForce;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -173,12 +181,43 @@ public class char_movement : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(transform.position, Vector3.down, out hit, 1.3f)){
             isGrounded = true;
+            
         }
         else{
             isGrounded = false;
         }
         
         
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        //Check if the player is colliding with the bubble
+        if(hit.gameObject.tag == "BubbleBounce"){
+            //If the player is colliding with the bubble, play the plop sound
+            SoundFXManager.instance.PlaySoundFXClip(plopSound, transform, 1f);
+            jumpForce = jumpForce * 5;
+            print(jumpForce);
+            controller.Move(Vector3.up * jumpForce * Time.deltaTime);
+            jumpForce = initialJumpForce;
+            
+
+        }
+        else if(hit.gameObject.tag == "BubbleCollect"){
+            //If the player is colliding with the bubble, play the plop sound
+            SoundFXManager.instance.PlaySoundFXClip(plopSound, transform, 1f);
+            countScore++;
+            print(countScore);
+        }
+        else if(hit.gameObject.tag == "DEATH"){
+            GameOver();
+        }
+
+        private void GameOver(){
+            //End the game and show the score
+            SoundFXManager.instance.PlaySoundFXClip(hitSound, transform, 1f);
+            print("Game Over");
+        }
     }
 
 }
