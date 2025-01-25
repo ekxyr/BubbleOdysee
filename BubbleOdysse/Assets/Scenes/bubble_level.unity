@@ -147,7 +147,7 @@ Transform:
   m_GameObject: {fileID: 17202365}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 2.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -168,7 +168,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1973798705}
+  dashForce: 0
+  bubble: {fileID: 0}
   moveSpeed: 10
+  jumpForce: 10
 --- !u!114 &17202368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,13 +219,13 @@ MonoBehaviour:
     m_ActionName: 'bubble_player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 17202365}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 17202367}
+        m_TargetAssemblyTypeName: char_movement, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -231,7 +234,19 @@ MonoBehaviour:
     m_ActionId: 73c3bb33-ee82-4649-ac9f-bdda37a880e7
     m_ActionName: 'bubble_player/Jump[/Keyboard/space]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 17202367}
+        m_TargetAssemblyTypeName: char_movement, Assembly-CSharp
+        m_MethodName: SwitchMode
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 566b08f0-efc5-4acb-8e36-6ec7091d83c1
     m_ActionName: 'bubble_player/SwitchMode[/Keyboard/shift]'
   m_NeverAutoSwitchControlSchemes: 0
@@ -828,7 +843,7 @@ Transform:
   m_GameObject: {fileID: 555591608}
   serializedVersion: 2
   m_LocalRotation: {x: -0.00000005765922, y: 0.00000003332001, z: 1.558316e-15, w: 1}
-  m_LocalPosition: {x: 0.81, y: 1.35, z: -3}
+  m_LocalPosition: {x: 0.81, y: 2.9599998, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1473,7 +1488,7 @@ Transform:
   m_GameObject: {fileID: 1973798702}
   serializedVersion: 2
   m_LocalRotation: {x: -0.00000005765922, y: 0.00000003332001, z: 1.9212058e-15, w: 1}
-  m_LocalPosition: {x: 0.81, y: 1.35, z: -3}
+  m_LocalPosition: {x: 0.81, y: 2.9599998, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
