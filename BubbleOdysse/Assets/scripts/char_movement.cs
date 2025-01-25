@@ -64,57 +64,68 @@ public class char_movement : MonoBehaviour
         //switch between modes and change the mode variable and move speed
 
         //Modes: 0 - Dash, 1 - Floating, 2 - SummonBubble
-        
-        mode = (mode + 1) % 3;
-        if(mode == 0){
+        if(context.performed){
+            mode = (mode + 1) % 3;
+            if(mode == 0){
             moveSpeed = 10;
-        }
-        else if(mode == 1){
+            }
+            else if(mode == 1){
             moveSpeed = 3;
-        }
-        else if(mode == 2){
+            }
+            else if(mode == 2){
             moveSpeed = 5;
-        }      
+            }    
+        } 
+          
 
     }
     
     public void ActionInput(InputAction.CallbackContext context)
     {
 
-        //Check which mode is active and call the corresponding function
-        if(mode == 0){
-            Dash();
+        if(context.performed){
+            //Check which mode is active and call the corresponding function
+            if(mode == 0){
+                Dash();
+            }
+            else if(mode == 1){
+                Floating();
+            }
+            else if(mode == 2){
+                SummonBubble();
+            }
         }
-        else if(mode == 1){
-            Floating();
-        }
-        else if(mode == 2){
-            SummonBubble();
-        }
-            
-    
     }
+    
     public void Jump(InputAction.CallbackContext context){
         //Lets the player jump normally
         if(isGrounded){
             controller.Move(Vector3.up * jumpForce * Time.deltaTime);
         }
+
         
 
     }
 
     private void Floating(){
         // Lets the player float in the air while holding spacbar and move slowly in the air
+        print("Floating");
     }
 
     private void Dash(){
+        
         //Lets the player dash in the direction he is facing
         controller.Move(transform.forward * dashForce * Time.deltaTime);
+
+        print("Dashing");
 
 
     }
 
     private void SummonBubble(){
+
+        print("Summoning Bubble");
+        
         //Check if the bubble is already summoned
              
 

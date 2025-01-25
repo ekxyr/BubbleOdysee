@@ -34,12 +34,21 @@
                 },
                 {
                     "name": "SwitchMode",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "566b08f0-efc5-4acb-8e36-6ec7091d83c1",
-                    "expectedControlType": "",
+                    "expectedControlType": "Integer",
                     "processors": "",
                     "interactions": "Press",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ActionKey",
+                    "type": "Button",
+                    "id": "87ee6345-5c64-4e3a-b0e7-97e81871d180",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -128,6 +137,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwitchMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7166bade-281c-479d-8f98-380636e1f0af",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActionKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
