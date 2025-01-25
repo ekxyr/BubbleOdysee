@@ -17,6 +17,16 @@ public class char_movement : MonoBehaviour
     [SerializeField] private float dashForce;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
+
+
+    //SOUND 
+    [SerializeField] private AudioClip dashSound;
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip plopSound;
+    [SerializeField] private AudioClip hitSound;
+    [SerializeField] private AudioClip floatSound;
+    [SerializeField] private AudioClip[] runSound;
+
     //private float gravity = 9.8f;
     private bool isGrounded;
 
@@ -58,7 +68,7 @@ public class char_movement : MonoBehaviour
     public void GetMoveInput(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-
+        SoundFXManager.instance.PlayRandomSoundFXClip(runSound, transform, 1f);
     }
 
     public void SwitchMode(InputAction.CallbackContext context)
@@ -103,6 +113,9 @@ public class char_movement : MonoBehaviour
         //Lets the player jump normally
         if(isGrounded){
             controller.Move(Vector3.up * jumpForce * Time.deltaTime);
+
+            //Sound
+            SoundFXManager.instance.PlaySoundFXClip(jumpSound, transform, 1f);
         }
 
         
@@ -118,7 +131,10 @@ public class char_movement : MonoBehaviour
             transform.position = new Vector3(transform.position.x, currentHeight + 2, transform.position.z);
             isFloating = true;
             print("FloatingOn");
-        } 
+
+                //Sound
+                SoundFXManager.instance.PlaySoundFXClip(floatSound, transform, 1f);
+            } 
        }
        else isFloating = false;
        print("FloatingOff");
@@ -131,20 +147,24 @@ public class char_movement : MonoBehaviour
         
         //Lets the player dash in the direction he is facing
         controller.Move(transform.forward * dashForce * Time.deltaTime);
+        SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
 
     }
 
     private void SummonBubble(){
 
         print("Summoning Bubble");
-        
+
         //Check if the bubble is already summoned
-             
+
 
         //Summon the bubble in front of the player
 
         //bubble functions as a platform that the player can jump on
-        
+
+        //Sound
+        SoundFXManager.instance.PlaySoundFXClip(hitSound, transform, 1f);
+
 
     }
 
