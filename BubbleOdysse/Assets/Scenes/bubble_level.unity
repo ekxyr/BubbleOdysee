@@ -170,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1973798705}
   bubble: {fileID: 0}
-  dashForce: 50
+  dashForce: 120
   moveSpeed: 10
   jumpForce: 50
 --- !u!114 &17202368

@@ -17,10 +17,12 @@ public class char_movement : MonoBehaviour
     [SerializeField] private float dashForce;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
-    private float gravity = 9.8f;
+    //private float gravity = 9.8f;
     private bool isGrounded;
 
     float velocity;
+
+    bool isFloating = false;
 
 
     private int mode = 0;
@@ -108,17 +110,27 @@ public class char_movement : MonoBehaviour
     }
 
     private void Floating(){
-        // Lets the player float in the air while holding spacbar and move slowly in the air
-        print("Floating");
+        // Lets the player toggle floating mode wich gives him the current height +2 and stay there until he toggles it off
+
+       if(!isFloating){
+         if(!isGrounded){
+            float currentHeight = transform.position.y;
+            transform.position = new Vector3(transform.position.x, currentHeight + 2, transform.position.z);
+            isFloating = true;
+            print("FloatingOn");
+        } 
+       }
+       else isFloating = false;
+       print("FloatingOff");
+        
+
+        
     }
 
     private void Dash(){
         
         //Lets the player dash in the direction he is facing
         controller.Move(transform.forward * dashForce * Time.deltaTime);
-
-        print("Dashing");
-
 
     }
 

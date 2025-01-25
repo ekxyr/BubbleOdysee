@@ -1,17 +1,29 @@
-3 Mode  
- 
-Normal  
-Bounce  
-float 
 
-Mode - Normal (Floor Movement) 
-Spacebar - small jump 
-sprint 
- 
-Mode  - Float (Long distance) 
-Spacebar - Floats in X Meter height 
-Slowfall 
 
-Mode - Bounce (Heights) 
-Spacebar - Charge jump  
-Bouncing (up to 3 times become higher when timed(Mario jump)) 
+//Assets/Scripts/Managers/SoundFXManager
+
+//New Game Object SoundFX Manager
+
+//Code starts here
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SoundFXManager : MonoBehaviour
+{
+	public static SoundFXManager instance;
+
+	private void Awake()
+	{
+		if (instance == null)
+		{
+		instance = this;
+		}
+	}
+
+	public void ExampleFunction()
+	{
+
+	}
+}
