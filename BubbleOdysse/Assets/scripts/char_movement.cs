@@ -213,11 +213,11 @@ public class char_movement : MonoBehaviour
             GameOver();
         }
 
-        private void GameOver(){
+    }
+
+    public void GameOver(){
             //End the game and show the score
             SoundFXManager.instance.PlaySoundFXClip(hitSound, transform, 1f);
             print("Game Over");
-        }
     }
-
 }
