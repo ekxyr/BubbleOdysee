@@ -1,0 +1,17 @@
+3 Mode  
+ 
+Normal  
+Bounce  
+float 
+
+Mode - Normal (Floor Movement) 
+Spacebar - small jump 
+sprint 
+ 
+Mode  - Float (Long distance) 
+Spacebar - Floats in X Meter height 
+Slowfall 
+
+Mode - Bounce (Heights) 
+Spacebar - Charge jump  
+Bouncing (up to 3 times become higher when timed(Mario jump)) 
