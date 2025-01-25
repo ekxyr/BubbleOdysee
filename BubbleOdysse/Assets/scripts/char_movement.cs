@@ -14,9 +14,11 @@ public class char_movement : MonoBehaviour
 
     [Header("Movement Variables")]
     private Vector2 moveInput;
+    private Vector3 moveDirection;
     [SerializeField] private float dashForce;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float initialJumpForce;
+    [SerializeField] private float smoothTime = 0.05f;
     private float jumpForce;
 
     private int countScore = 0;
@@ -31,10 +33,9 @@ public class char_movement : MonoBehaviour
     [SerializeField] private AudioClip floatSound;
     [SerializeField] private AudioClip[] runSound;
 
-    //private float gravity = 9.8f;
-    private bool isGrounded;
-
-    float velocity;
+    private float gravity = -9.81f;
+    [SerializeField] private float gravityMultiplier = 3f;
+    private float velocity;
 
     bool isFloating = false;
 
@@ -55,30 +56,59 @@ public class char_movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-        GroundCheck();
+        
+        ApplyRotate();
+        ApplyGravity();
+        
+        ApplyMove();
+        
+
+        
+        //IsGrounded();
     }
 
-    private void Move()
+    public void Move(InputAction.CallbackContext context)
     {
-        Vector3 moveVelocity = (cam.transform.right * moveInput.x + cam.transform.forward * moveInput.y + Vector3.down) * Time.deltaTime * moveSpeed;
-        controller.Move(moveVelocity);
-        moveVelocity.y = 0;
-        Rotate(moveVelocity);
+        moveInput = context.ReadValue<Vector2>();
+        moveDirection  = new Vector3(moveInput.x, 0, moveInput.y);
+        SoundFXManager.instance.PlayRandomSoundFXClip(runSound, transform, 1f);
+
         
     }
 
-    private void Rotate(Vector3 target)
+    private void ApplyRotate()
     {
-        transform.LookAt(transform.position + target);
+        if(moveInput.sqrMagnitude == 0) return;
+
+       
+        moveDirection = Quaternion.Euler(0, cam.transform.eulerAngles.y, 0) * new Vector3(moveInput.x, 0, moveInput.y);
+        var targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 720 * Time.deltaTime);
+
+    }
+    
+    private void ApplyMove()
+    {
+        controller.Move(moveDirection * Time.deltaTime * moveSpeed);
     }
 
-    public void GetMoveInput(InputAction.CallbackContext context)
+    private void ApplyGravity()
     {
-        moveInput = context.ReadValue<Vector2>();
-        SoundFXManager.instance.PlayRandomSoundFXClip(runSound, transform, 1f);
+        if(IsGrounded() && velocity < 0)
+        {
+            velocity = -1.0f;
+        }
+        else
+        {
+            velocity += gravity * gravityMultiplier * Time.deltaTime;
+        }
+
+        moveDirection.y = velocity;
+        //controller.Move(Vector3.up * velocity * Time.deltaTime);
     }
 
+    
     public void SwitchMode(InputAction.CallbackContext context)
     {
         //switch between modes and change the mode variable and move speed
@@ -119,14 +149,11 @@ public class char_movement : MonoBehaviour
     
     public void Jump(InputAction.CallbackContext context){
         //Lets the player jump normally
-        if(isGrounded){
-            controller.Move(Vector3.up * jumpForce * Time.deltaTime);
-
-            //Sound
-            SoundFXManager.instance.PlaySoundFXClip(jumpSound, transform, 1f);
-        }
-
+        if(!context.performed) return;
         
+        if(!IsGrounded()) return;   
+
+        velocity += jumpForce;
 
     }
 
@@ -134,9 +161,8 @@ public class char_movement : MonoBehaviour
         // Lets the player toggle floating mode wich gives him the current height +2 and stay there until he toggles it off
 
        if(!isFloating){
-         if(!isGrounded){
-            float currentHeight = transform.position.y;
-            transform.position = new Vector3(transform.position.x, currentHeight + 2, transform.position.z);
+        if(!IsGrounded()){
+            gravityMultiplier = 0.1f;
             isFloating = true;
             print("FloatingOn");
 
@@ -144,8 +170,12 @@ public class char_movement : MonoBehaviour
                 SoundFXManager.instance.PlaySoundFXClip(floatSound, transform, 1f);
             } 
        }
-       else isFloating = false;
-       print("FloatingOff");
+        else {
+            isFloating = false;
+            gravityMultiplier = 3f;
+            print("FloatingOff");
+
+       }
         
 
         
@@ -176,18 +206,8 @@ public class char_movement : MonoBehaviour
 
     }
 
-    private void GroundCheck(){
-        // Check if the player is standing on the ground iwth a raycast
-        RaycastHit hit;
-        if(Physics.Raycast(transform.position, Vector3.down, out hit, 1.3f)){
-            isGrounded = true;
-            
-        }
-        else{
-            isGrounded = false;
-        }
-        
-        
+    private bool IsGrounded(){
+        return controller.isGrounded;
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)

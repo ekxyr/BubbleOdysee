@@ -147,7 +147,7 @@ Transform:
   m_GameObject: {fileID: 17202365}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.02, y: 9.889, z: -6.79}
+  m_LocalPosition: {x: -22.209, y: 8.534, z: -5.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -172,7 +172,8 @@ MonoBehaviour:
   bubble: {fileID: 0}
   dashForce: 120
   moveSpeed: 10
-  initialJumpForce: 70
+  initialJumpForce: 4
+  smoothTime: 0.05
   dashSound: {fileID: 8300000, guid: 45f484306de730d4e846fa6411481e63, type: 3}
   jumpSound: {fileID: 8300000, guid: 776f676dbbd6053499c1cba0aa7698be, type: 3}
   plopSound: {fileID: 8300000, guid: e9590b0bae0f6444a9728bddf06166da, type: 3}
@@ -187,6 +188,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d075dc5d5386c59478083581148c2c75, type: 3}
   - {fileID: 8300000, guid: 90e202ba0e2f13147af69485537fb182, type: 3}
   - {fileID: 8300000, guid: b18e36ddafaed2f4d8b331f8d7edd464, type: 3}
+  gravityMultiplier: 3
 --- !u!114 &17202368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +222,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 17202367}
         m_TargetAssemblyTypeName: char_movement, Assembly-CSharp
-        m_MethodName: GetMoveInput
+        m_MethodName: Move
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1010,7 +1012,7 @@ Transform:
   m_GameObject: {fileID: 555591608}
   serializedVersion: 2
   m_LocalRotation: {x: 0.028205978, y: -0.0000000046395945, z: 1.3091628e-10, w: 0.9996022}
-  m_LocalPosition: {x: -25.36, y: 11.0127535, z: -10.701691}
+  m_LocalPosition: {x: -21.549, y: 9.657754, z: -9.291691}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2774,7 +2776,7 @@ Transform:
   m_GameObject: {fileID: 1973798702}
   serializedVersion: 2
   m_LocalRotation: {x: 0.02820598, y: -0.000000004639595, z: 1.309164e-10, w: 0.99960214}
-  m_LocalPosition: {x: -25.36, y: 11.0127535, z: -10.701691}
+  m_LocalPosition: {x: -21.549, y: 9.657754, z: -9.291691}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
