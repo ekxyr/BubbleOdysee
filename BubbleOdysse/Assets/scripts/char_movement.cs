@@ -20,6 +20,8 @@ public class char_movement : MonoBehaviour
     private float gravity = 9.8f;
     private bool isGrounded;
 
+    float velocity;
+
 
     private int mode = 0;
     
@@ -39,7 +41,7 @@ public class char_movement : MonoBehaviour
 
     private void Move()
     {
-        Vector3 moveVelocity = (cam.transform.right * moveInput.x + cam.transform.forward * moveInput.y + Vector3.down*gravity) * Time.deltaTime * moveSpeed;
+        Vector3 moveVelocity = (cam.transform.right * moveInput.x + cam.transform.forward * moveInput.y + Vector3.down) * Time.deltaTime * moveSpeed;
         controller.Move(moveVelocity);
         moveVelocity.y = 0;
         Rotate(moveVelocity);
@@ -93,7 +95,11 @@ public class char_movement : MonoBehaviour
     
     }
     public void Jump(InputAction.CallbackContext context){
-        //Lets the player jump normaly
+        //Lets the player jump normally
+        if(isGrounded){
+            controller.Move(Vector3.up * jumpForce * Time.deltaTime);
+        }
+        
 
     }
 
@@ -120,7 +126,15 @@ public class char_movement : MonoBehaviour
     }
 
     private void GroundCheck(){
-        // Check if the player is standing on the ground
+        // Check if the player is standing on the ground iwth a raycast
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, Vector3.down, out hit, 1.3f)){
+            isGrounded = true;
+        }
+        else{
+            isGrounded = false;
+        }
+        
         
     }
 
