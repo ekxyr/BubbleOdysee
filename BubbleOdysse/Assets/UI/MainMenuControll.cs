@@ -20,7 +20,7 @@ public class MainMenuControll : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        Time.timeScale = 0;
     }
 
     // Update is called once per frame
@@ -71,6 +71,7 @@ public class MainMenuControll : MonoBehaviour
             _HideMouse.SetActive(true);
         }
         gameObject.SetActive(false);
+        Time.timeScale = 1;
         
     }
 }
