@@ -256,7 +256,7 @@ public class char_movement : MonoBehaviour
             
         }
         
-        else if(hit.gameObject.tag == "DEATH"){
+        else if(hit.gameObject.tag == "DeathPlane"){
             GameOver();
         }
         
