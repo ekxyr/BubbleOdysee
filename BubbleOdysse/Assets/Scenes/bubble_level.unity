@@ -197,15 +197,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1973798705}
-  bubble: {fileID: 0}
+  bubble: {fileID: 502392520}
   _gameOver: {fileID: 556163594}
   _youWon: {fileID: 2033198712}
   _HideMouse: {fileID: 379546053}
   _ShowMouse: {fileID: 1743656908}
-  dashForce: 120
-  moveSpeed: 10
+  dashForce: 300
+  moveSpeed: 7
   initialJumpForce: 5
-  smoothTime: 0.05
   animator: {fileID: 1928999974}
   dashSound: {fileID: 8300000, guid: 45f484306de730d4e846fa6411481e63, type: 3}
   jumpSound: {fileID: 8300000, guid: 776f676dbbd6053499c1cba0aa7698be, type: 3}
@@ -221,7 +220,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d075dc5d5386c59478083581148c2c75, type: 3}
   - {fileID: 8300000, guid: 90e202ba0e2f13147af69485537fb182, type: 3}
   - {fileID: 8300000, guid: b18e36ddafaed2f4d8b331f8d7edd464, type: 3}
-  gravityMultiplier: 3
+  initialGravityMultiplier: 1
 --- !u!114 &17202368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -900,13 +899,14 @@ GameObject:
   - component: {fileID: 502392523}
   - component: {fileID: 502392521}
   - component: {fileID: 502392522}
+  - component: {fileID: 502392525}
   m_Layer: 0
-  m_Name: w
+  m_Name: BounceBubble
   m_TagString: BubbleBounce
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &502392521
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -996,6 +996,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &502392525
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502392520}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &555591608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,13 +1166,13 @@ MonoBehaviour:
   Radius: 10
   Orbits:
     Top:
-      Radius: 3
-      Height: 1
-    Center:
       Radius: 4
-      Height: 0
+      Height: 2
+    Center:
+      Radius: 5
+      Height: 0.5
     Bottom:
-      Radius: 3
+      Radius: 4
       Height: -1
     SplineCurvature: 0.516
   RecenteringTarget: 2
@@ -1236,8 +1257,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555591608}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.028205963, y: 0, z: 0, w: 0.99960214}
-  m_LocalPosition: {x: -5.1000004, y: 7.783754, z: -5.891691}
+  m_LocalRotation: {x: 0.083501786, y: -1.3787501e-16, z: 1.2304438e-17, w: 0.99650764}
+  m_LocalPosition: {x: -5.1000004, y: 8.398308, z: -6.897047}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3596,8 +3617,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973798702}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.028205963, y: 0, z: 0, w: 0.99960214}
-  m_LocalPosition: {x: -5.1000004, y: 7.783754, z: -5.891691}
+  m_LocalRotation: {x: 0.08350179, y: -1.3781161e-16, z: 1.1547847e-17, w: 0.99650764}
+  m_LocalPosition: {x: -5.1000004, y: 8.398308, z: -6.897047}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4015,8 +4036,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1973798706}
-  - {fileID: 2105109333}
   - {fileID: 555591614}
+  - {fileID: 2105109333}
   - {fileID: 17202366}
   - {fileID: 895538306}
   - {fileID: 1132474870}
