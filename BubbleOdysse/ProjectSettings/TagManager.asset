@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - BubbleBounce
+  - Coin
+  - EndBox
+  - DeathPlane
   layers:
   - Default
   - TransparentFX
