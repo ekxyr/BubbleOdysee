@@ -30,6 +30,7 @@ public class char_movement : MonoBehaviour
     [SerializeField] private float dashForce;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float initialJumpForce;
+    [SerializeField] private float smoothTime = 0.05f;
     private float jumpForce;
 
     private int countScore = 0;
@@ -125,7 +126,6 @@ public class char_movement : MonoBehaviour
         }
 
         moveDirection.y = velocity;
-        print(moveDirection.y);
         //controller.Move(Vector3.up * velocity * Time.deltaTime);
     }
 
@@ -138,16 +138,13 @@ public class char_movement : MonoBehaviour
         if(context.performed){
             mode = (mode + 1) % 3;
             if(mode == 0){
-            moveSpeed = 7;
-            print("Dash Mode");
+            moveSpeed = 10;
             }
             else if(mode == 1){
-            moveSpeed = 6;
-            print("Float Mode");
+            moveSpeed = 3;
             }
             else if(mode == 2){
-            moveSpeed = 6;
-            print("Bounce Mode");
+            moveSpeed = 5;
             }    
         } 
           
@@ -161,15 +158,12 @@ public class char_movement : MonoBehaviour
             //Check which mode is active and call the corresponding function
             if(mode == 0){
                 Dash();
-                
             }
             else if(mode == 1){
                 Floating();
-                
             }
             else if(mode == 2){
                 SummonBubble();
-                
             }
         }
     }
@@ -190,22 +184,21 @@ public class char_movement : MonoBehaviour
         // Lets the player toggle floating mode wich gives him the current height +2 and stay there until he toggles it off
 
        if(!isFloating){
-            if(!IsGrounded()){
-                gravityMultiplier = 0.05f;
-                jumpForce = 0f;
-                isFloating = true;
-
-                velocity = 0;
-                
-
+        if(!IsGrounded()){
+            gravityMultiplier = 0.1f;
+            isFloating = true;
+            animator.SetBool("IsFloating", true);
+            print("FloatingOn");
+            
                 //Sound
                 SoundFXManager.instance.PlaySoundFXClip(floatSound, transform, 1f);
             } 
        }
         else {
             isFloating = false;
-            gravityMultiplier = initialGravityMultiplier;
-            jumpForce = initialJumpForce;
+            animator.SetBool("IsFloating", false);
+            gravityMultiplier = 3f;
+            print("FloatingOff");
 
        }
         
@@ -226,7 +219,7 @@ public class char_movement : MonoBehaviour
 
     private void SummonBubble(){
 
-        
+        print("Summoning Bubble");
 
         
         //Summon the bubble in front of the player
