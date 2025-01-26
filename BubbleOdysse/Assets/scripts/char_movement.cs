@@ -7,7 +7,7 @@ using UnityEngine.Animations;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
-
+using System;
 
 public class char_movement : MonoBehaviour
 {
@@ -16,6 +16,12 @@ public class char_movement : MonoBehaviour
     [SerializeField] private Camera cam;
     private CharacterController controller;
     [SerializeField] private GameObject bubble;
+    [SerializeField] GameObject _gameOver;
+    [SerializeField] GameObject _youWon;
+    [SerializeField] GameObject _HideMouse;
+    [SerializeField] GameObject _ShowMouse;
+    Boolean over = false;
+    Boolean win = false;
 
 
     [Header("Movement Variables")]
@@ -56,8 +62,7 @@ public class char_movement : MonoBehaviour
         
         controller = GetComponent<CharacterController>();
         jumpForce = initialJumpForce;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        
     }
 
     // Update is called once per frame
@@ -263,6 +268,13 @@ public class char_movement : MonoBehaviour
         else if (hit.gameObject.CompareTag("EndBox") && WorldScript.collectedCoins >= 4)
         {
             print("YOU HAVE WON!!!!");
+            win = true;
+            if (win == true)
+            {
+                _HideMouse.SetActive(false);
+                _ShowMouse.SetActive(true);
+                _youWon.SetActive(true);
+            }
         }
         
     }
@@ -270,6 +282,13 @@ public class char_movement : MonoBehaviour
     public void GameOver(){
             //End the game and show the score
             SoundFXManager.instance.PlaySoundFXClip(hitSound, transform, 1f);
-            print("Game Over");
+        over = true;
+        if (over == true)
+        {
+            _HideMouse.SetActive(false);
+            _ShowMouse.SetActive(true);
+            _gameOver.SetActive(true);
+        }
+        print("Game Over");
     }
 }

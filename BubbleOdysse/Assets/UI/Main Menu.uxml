@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/main%20menu.uss?fileID=7433441132597879392&amp;guid=764ad1e231263ed47a6c642586b2aca3&amp;type=3#main menu" />
+    <ui:VisualElement name="Panel" class="panel" style="flex-grow: 1; align-items: center;">
+        <ui:VisualElement name="Container" class="menu" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.67); align-items: center; width: 400px; height: auto; max-width: none; max-height: 300px; min-width: auto; min-height: auto; justify-content: flex-start; flex-direction: column; align-content: auto; padding-top: 0;">
+            <ui:Button text="Start" name="Start" style="-unity-font-definition: url(&quot;project://database/Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Fonts/PerfectDOSVGA437.ttf?fileID=12800000&amp;guid=74a5091d8707f334b9a5c31ef71a64ba&amp;type=3#PerfectDOSVGA437&quot;);" />
+            <ui:Button text="Audio" name="Audio" class="hide" />
+            <ui:Button text="Quit" name="Quit" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

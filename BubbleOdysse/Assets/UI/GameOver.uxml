@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/game%20over.uss?fileID=7433441132597879392&amp;guid=7afed110852f8ed48ab6e84d1c1da7ad&amp;type=3#game over" />
+    <ui:VisualElement name="Panel" class="panel" style="flex-grow: 1; align-items: center; background-color: rgb(0, 0, 0);">
+        <ui:Label text="Game Over" name="GameOver" style="-unity-font-definition: url(&quot;project://database/Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Fonts/PerfectDOSVGA437.ttf?fileID=12800000&amp;guid=74a5091d8707f334b9a5c31ef71a64ba&amp;type=3#PerfectDOSVGA437&quot;); font-size: 80px; color: rgb(255, 0, 0);" />
+        <ui:VisualElement name="Container" class="menu" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.67); align-items: center; width: 400px; height: auto; max-width: none; max-height: 300px; min-width: auto; min-height: auto; justify-content: flex-start; flex-direction: column; align-content: auto; padding-top: 0;">
+            <ui:Button text="Retry" name="Start" style="-unity-font-definition: url(&quot;project://database/Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Fonts/PerfectDOSVGA437.ttf?fileID=12800000&amp;guid=74a5091d8707f334b9a5c31ef71a64ba&amp;type=3#PerfectDOSVGA437&quot;);" />
+            <ui:Button text="Audio" name="Audio" class="hide" />
+            <ui:Button text="Quit" name="Quit" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
