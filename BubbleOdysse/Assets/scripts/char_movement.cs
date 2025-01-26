@@ -49,7 +49,8 @@ public class char_movement : MonoBehaviour
     [SerializeField] private AudioClip[] runSound;
 
     private float gravity = -9.81f;
-    [SerializeField] private float gravityMultiplier = 3f;
+    [SerializeField] private float initialGravityMultiplier = 1f;
+    private float gravityMultiplier = 1f;
     private float velocity;
 
     bool isFloating = false;
@@ -205,8 +206,11 @@ public class char_movement : MonoBehaviour
     private void Dash(){
         
         //Lets the player dash in the direction he is facing
-        controller.Move(transform.forward * dashForce * Time.deltaTime);
-        SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
+        if(IsGrounded()){
+            controller.Move(transform.forward * dashForce * Time.deltaTime);
+            SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
+        }
+        
 
     }
 
