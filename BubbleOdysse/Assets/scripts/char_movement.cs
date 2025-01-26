@@ -1,7 +1,13 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine.InputSystem;
+using UnityEngine.Animations;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
+
 
 public class char_movement : MonoBehaviour
 {
@@ -24,7 +30,10 @@ public class char_movement : MonoBehaviour
     private int countScore = 0;
 
 
-
+    //ANIMATION
+    [SerializeField] private Animator animator;
+    
+    
     //SOUND 
     [SerializeField] private AudioClip dashSound;
     [SerializeField] private AudioClip jumpSound;
@@ -38,17 +47,15 @@ public class char_movement : MonoBehaviour
     private float velocity;
 
     bool isFloating = false;
-
-
     private int mode = 0;
-    
+    private bool isColliding;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
         controller = GetComponent<CharacterController>();
         jumpForce = initialJumpForce;
-
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -56,7 +63,7 @@ public class char_movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        isColliding = false; //check if colliding
         ApplyRotate();
         ApplyGravity();
         
@@ -71,9 +78,12 @@ public class char_movement : MonoBehaviour
     {
         moveInput = context.ReadValue<Vector2>();
         moveDirection  = new Vector3(moveInput.x, 0, moveInput.y);
+        animator.SetBool("IsRunning", true);
         SoundFXManager.instance.PlayRandomSoundFXClip(runSound, transform, 1f);
-
-        
+        if (moveInput.x == 0 && moveInput.y == 0)
+        {
+            animator.SetBool("IsRunning", false);
+        }
     }
 
     private void ApplyRotate()
@@ -95,8 +105,10 @@ public class char_movement : MonoBehaviour
 
     private void ApplyGravity()
     {
+        
         if(IsGrounded() && velocity < 0)
         {
+           
             velocity = -1.0f;
         }
         else
@@ -149,11 +161,13 @@ public class char_movement : MonoBehaviour
     
     public void Jump(InputAction.CallbackContext context){
         //Lets the player jump normally
+        
         if(!context.performed) return;
         
         if(!IsGrounded()) return;   
 
         velocity += jumpForce;
+        
 
     }
 
@@ -164,6 +178,7 @@ public class char_movement : MonoBehaviour
         if(!IsGrounded()){
             gravityMultiplier = 0.1f;
             isFloating = true;
+            
             print("FloatingOn");
 
                 //Sound
@@ -213,26 +228,43 @@ public class char_movement : MonoBehaviour
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         //Check if the player is colliding with the bubble
-        if(hit.gameObject.tag == "BubbleBounce"){
+        if (hit.gameObject.tag == "BubbleBounce")
+        {
             //If the player is colliding with the bubble, play the plop sound
             SoundFXManager.instance.PlaySoundFXClip(plopSound, transform, 1f);
             jumpForce = jumpForce * 5;
             print(jumpForce);
             controller.Move(Vector3.up * jumpForce * Time.deltaTime);
             jumpForce = initialJumpForce;
-            
-
         }
+        
+        
         else if(hit.gameObject.tag == "BubbleCollect"){
             //If the player is colliding with the bubble, play the plop sound
             SoundFXManager.instance.PlaySoundFXClip(plopSound, transform, 1f);
             countScore++;
             print(countScore);
         }
+        
+        else if (hit.gameObject.CompareTag("Coin"))
+        {
+            //Collision detection with Coins + prevent from trigger multiple times when collecting
+            if(isColliding) return;
+            isColliding = true;
+            Destroy(hit.gameObject);
+            WorldScript.collectCoin();
+            
+        }
+        
         else if(hit.gameObject.tag == "DEATH"){
             GameOver();
         }
-
+        
+        else if (hit.gameObject.CompareTag("EndBox") && WorldScript.collectedCoins >= 4)
+        {
+            print("YOU HAVE WON!!!!");
+        }
+        
     }
 
     public void GameOver(){
