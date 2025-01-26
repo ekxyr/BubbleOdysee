@@ -208,18 +208,17 @@ MonoBehaviour:
   animator: {fileID: 1928999974}
   dashSound: {fileID: 8300000, guid: 45f484306de730d4e846fa6411481e63, type: 3}
   jumpSound: {fileID: 8300000, guid: 776f676dbbd6053499c1cba0aa7698be, type: 3}
-  plopSound: {fileID: 8300000, guid: e9590b0bae0f6444a9728bddf06166da, type: 3}
-  hitSound: {fileID: 8300000, guid: 6538c1fdeae6c27488a2920cc4376e9e, type: 3}
+  plopSound: {fileID: 8300000, guid: adc45740346b269448cf33886bd6477d, type: 3}
+  swingSound: {fileID: 8300000, guid: 2d89270fb851dbc4f934aacc1db38a73, type: 3}
   floatSound: {fileID: 8300000, guid: 3321b9ca820dc5c4b8d3ae533830b660, type: 3}
-  runSound:
-  - {fileID: 8300000, guid: 51d1f9602e5adbd4bba5df10e5eac705, type: 3}
-  - {fileID: 8300000, guid: f123cded78b6e1b4b826f3ad3ee56524, type: 3}
-  - {fileID: 8300000, guid: 594bb548c0fa2e24c8a501d2bfc01df9, type: 3}
-  - {fileID: 8300000, guid: f3ff3fce15ac2b54698536c0fa712c27, type: 3}
-  - {fileID: 8300000, guid: f09050e2c0e5e744ba1df545f091c952, type: 3}
-  - {fileID: 8300000, guid: d075dc5d5386c59478083581148c2c75, type: 3}
-  - {fileID: 8300000, guid: 90e202ba0e2f13147af69485537fb182, type: 3}
-  - {fileID: 8300000, guid: b18e36ddafaed2f4d8b331f8d7edd464, type: 3}
+  walkSound: {fileID: 8300000, guid: 351fdcbc1f8af5948b450fd1de480ba8, type: 3}
+  winSound: {fileID: 8300000, guid: 20a41ffe479936544b3a6d633cf91fc9, type: 3}
+  coinSound: {fileID: 8300000, guid: 9f005d597bcaa3f4db4bd7c5f18e30af, type: 3}
+  deathSound:
+  - {fileID: 8300000, guid: 10502a2edd23eb842823c60464b3727d, type: 3}
+  - {fileID: 8300000, guid: c85d2f5d65e908e4aabb018a82374090, type: 3}
+  - {fileID: 8300000, guid: 1bbf78ca0bd289a41b7bccedc27dd153, type: 3}
+  - {fileID: 8300000, guid: d1ed97e309c7b894f9a47cd22b87884f, type: 3}
   initialGravityMultiplier: 1
 --- !u!114 &17202368
 MonoBehaviour:

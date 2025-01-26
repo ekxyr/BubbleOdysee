@@ -40,12 +40,17 @@ public class char_movement : MonoBehaviour
     
     
     //SOUND 
-    [SerializeField] private AudioClip dashSound;
-    [SerializeField] private AudioClip jumpSound;
-    [SerializeField] private AudioClip plopSound;
-    [SerializeField] private AudioClip hitSound;
-    [SerializeField] private AudioClip floatSound;
-    [SerializeField] private AudioClip[] runSound;
+    [SerializeField] private AudioClip dashSound;       //DONE
+    [SerializeField] private AudioClip jumpSound;       //DONE
+    [SerializeField] private AudioClip plopSound;       //DONE
+    [SerializeField] private AudioClip swingSound;      //DONE
+    [SerializeField] private AudioClip floatSound;      //DONE
+    [SerializeField] private AudioClip walkSound;
+    [SerializeField] private AudioClip winSound;        //DONE
+    [SerializeField] private AudioClip coinSound;       //DONE
+    [SerializeField] private AudioClip[] deathSound;    //DONE
+
+    private bool isRepeating = false;
 
     private float gravity = -9.81f;
     [SerializeField] private float initialGravityMultiplier = 1f;
@@ -64,6 +69,7 @@ public class char_movement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         jumpForce = initialJumpForce;
         gravityMultiplier = initialGravityMultiplier;
+        InvokeRepeating("RepeatFunction", 0f, 0.5f);
         
     }
 
@@ -88,12 +94,26 @@ public class char_movement : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
         moveDirection  = new Vector3(moveInput.x, 0, moveInput.y);
         animator.SetBool("IsRunning", true);
-        SoundFXManager.instance.PlayRandomSoundFXClip(runSound, transform, 1f);
+        SoundFXManager.instance.PlaySoundFXClip(walkSound, transform, 1f);
+        
         if (moveInput.x == 0 && moveInput.y == 0)
         {
             animator.SetBool("IsRunning", false);
+            isRepeating = false;
         }
     }
+
+     void RepeatFunction()
+    {
+        if(animator.GetBool("IsRunning") == false)
+        {
+            return;
+        }
+   
+         SoundFXManager.instance.PlaySoundFXClip(walkSound, transform, 1f);
+         
+    }
+
 
     private void ApplyRotate()
     {
@@ -177,6 +197,7 @@ public class char_movement : MonoBehaviour
 
         velocity += jumpForce;
         
+        SoundFXManager.instance.PlaySoundFXClip(jumpSound, transform, 1f);
 
     }
 
@@ -225,7 +246,7 @@ public class char_movement : MonoBehaviour
         //bubble functions as a platform that the player can jump on
 
         //Sound
-        SoundFXManager.instance.PlaySoundFXClip(hitSound, transform, 1f);
+        SoundFXManager.instance.PlaySoundFXClip(swingSound, transform, 1f);
 
 
     }
@@ -241,22 +262,12 @@ public class char_movement : MonoBehaviour
         {
             //If the player is colliding with the bubble, play the plop sound
             SoundFXManager.instance.PlaySoundFXClip(plopSound, transform, 1f);
-            /*jumpForce = jumpForce * 5;
-            print(jumpForce);
-            controller.Move(Vector3.up * jumpForce * Time.deltaTime);
-            jumpForce = initialJumpForce;*/
             
             bubble.SetActive(false);
             velocity = jumpForce * 2;
         }
         
         
-        else if(hit.gameObject.tag == "BubbleCollect"){
-            //If the player is colliding with the bubble, play the plop sound
-            SoundFXManager.instance.PlaySoundFXClip(plopSound, transform, 1f);
-            countScore++;
-            print(countScore);
-        }
         
         else if (hit.gameObject.CompareTag("Coin"))
         {
@@ -265,7 +276,7 @@ public class char_movement : MonoBehaviour
             isColliding = true;
             Destroy(hit.gameObject);
             WorldScript.collectCoin();
-            
+            SoundFXManager.instance.PlaySoundFXClip(coinSound, transform, 1f);
         }
         
         else if(hit.gameObject.tag == "DeathPlane"){
@@ -275,6 +286,7 @@ public class char_movement : MonoBehaviour
         else if (hit.gameObject.CompareTag("EndBox") && WorldScript.collectedCoins >= 4)
         {
             print("YOU HAVE WON!!!!");
+            SoundFXManager.instance.PlaySoundFXClip(winSound, transform, 1f);
             win = true;
             if (win == true)
             {
@@ -288,7 +300,7 @@ public class char_movement : MonoBehaviour
 
     public void GameOver(){
             //End the game and show the score
-            SoundFXManager.instance.PlaySoundFXClip(hitSound, transform, 1f);
+            SoundFXManager.instance.PlayRandomSoundFXClip(deathSound, transform, 1f);
         over = true;
         if (over == true)
         {
