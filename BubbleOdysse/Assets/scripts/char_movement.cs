@@ -30,7 +30,6 @@ public class char_movement : MonoBehaviour
     [SerializeField] private float dashForce;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float initialJumpForce;
-    [SerializeField] private float smoothTime = 0.05f;
     private float jumpForce;
 
     private int countScore = 0;
@@ -50,7 +49,7 @@ public class char_movement : MonoBehaviour
 
     private float gravity = -9.81f;
     [SerializeField] private float initialGravityMultiplier = 1f;
-    private float gravityMultiplier = 1f;
+    private float gravityMultiplier;
     private float velocity;
 
     bool isFloating = false;
@@ -64,6 +63,7 @@ public class char_movement : MonoBehaviour
         
         controller = GetComponent<CharacterController>();
         jumpForce = initialJumpForce;
+        gravityMultiplier = initialGravityMultiplier;
         
     }
 
@@ -138,13 +138,13 @@ public class char_movement : MonoBehaviour
         if(context.performed){
             mode = (mode + 1) % 3;
             if(mode == 0){
-            moveSpeed = 10;
+            moveSpeed = 7;
             }
             else if(mode == 1){
-            moveSpeed = 3;
+            moveSpeed = 6;
             }
             else if(mode == 2){
-            moveSpeed = 5;
+            moveSpeed = 6;
             }    
         } 
           
@@ -185,11 +185,10 @@ public class char_movement : MonoBehaviour
 
        if(!isFloating){
         if(!IsGrounded()){
-            gravityMultiplier = 0.1f;
-            isFloating = true;
-            animator.SetBool("IsFloating", true);
-            print("FloatingOn");
-            
+                gravityMultiplier = 0.05f;
+                isFloating = true;
+
+                velocity = 0;
                 //Sound
                 SoundFXManager.instance.PlaySoundFXClip(floatSound, transform, 1f);
             } 
@@ -197,13 +196,10 @@ public class char_movement : MonoBehaviour
         else {
             isFloating = false;
             animator.SetBool("IsFloating", false);
-            gravityMultiplier = 3f;
+            gravityMultiplier = initialGravityMultiplier;
             print("FloatingOff");
 
-       }
-        
-
-        
+       }        
     }
 
     private void Dash(){
@@ -245,11 +241,13 @@ public class char_movement : MonoBehaviour
         {
             //If the player is colliding with the bubble, play the plop sound
             SoundFXManager.instance.PlaySoundFXClip(plopSound, transform, 1f);
-            jumpForce = jumpForce * 5;
+            /*jumpForce = jumpForce * 5;
             print(jumpForce);
             controller.Move(Vector3.up * jumpForce * Time.deltaTime);
-            jumpForce = initialJumpForce;
+            jumpForce = initialJumpForce;*/
+            
             bubble.SetActive(false);
+            velocity = jumpForce * 2;
         }
         
         

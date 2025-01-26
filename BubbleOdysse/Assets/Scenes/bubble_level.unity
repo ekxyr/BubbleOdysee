@@ -202,10 +202,9 @@ MonoBehaviour:
   _youWon: {fileID: 2033198712}
   _HideMouse: {fileID: 379546053}
   _ShowMouse: {fileID: 1743656908}
-  dashForce: 300
+  dashForce: 250
   moveSpeed: 7
-  initialJumpForce: 5
-  smoothTime: 0.05
+  initialJumpForce: 3.5
   animator: {fileID: 1928999974}
   dashSound: {fileID: 8300000, guid: 45f484306de730d4e846fa6411481e63, type: 3}
   jumpSound: {fileID: 8300000, guid: 776f676dbbd6053499c1cba0aa7698be, type: 3}
