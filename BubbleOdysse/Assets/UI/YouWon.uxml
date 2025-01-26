@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/you%20won.uss?fileID=7433441132597879392&amp;guid=c5d5543925d6b6c49a02588a661f6072&amp;type=3#you won" />
+    <ui:VisualElement name="Panel" class="panel" style="flex-grow: 1; align-items: center; background-color: rgba(1, 54, 106, 0.91);">
+        <ui:Label text="You Won" name="GameOver" style="-unity-font-definition: url(&quot;project://database/Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Fonts/PerfectDOSVGA437.ttf?fileID=12800000&amp;guid=74a5091d8707f334b9a5c31ef71a64ba&amp;type=3#PerfectDOSVGA437&quot;); font-size: 80px; color: rgb(147, 116, 14);" />
+        <ui:VisualElement name="Container" class="menu" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.67); align-items: center; width: 400px; height: auto; max-width: none; max-height: 300px; min-width: auto; min-height: auto; justify-content: flex-start; flex-direction: column; align-content: auto; padding-top: 0;">
+            <ui:Button text="Play Again" name="Start" style="-unity-font-definition: url(&quot;project://database/Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Fonts/PerfectDOSVGA437.ttf?fileID=12800000&amp;guid=74a5091d8707f334b9a5c31ef71a64ba&amp;type=3#PerfectDOSVGA437&quot;);" />
+            <ui:Button text="Audio" name="Audio" class="hide" />
+            <ui:Button text="Quit" name="Quit" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
