@@ -57,6 +57,7 @@ public class char_movement : MonoBehaviour
     bool isFloating = false;
     private int mode = 0;
     private bool isColliding;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -269,10 +270,10 @@ public class char_movement : MonoBehaviour
 
         print("Summoning Bubble");
 
-        //Check if the bubble is already summoned
-
-
+        
         //Summon the bubble in front of the player
+        bubble.transform.position = transform.position + transform.forward * 2;
+        bubble.SetActive(true);
 
         //bubble functions as a platform that the player can jump on
 
@@ -297,6 +298,7 @@ public class char_movement : MonoBehaviour
             print(jumpForce);
             controller.Move(Vector3.up * jumpForce * Time.deltaTime);
             jumpForce = initialJumpForce;
+            bubble.SetActive(false);
         }
         
         
