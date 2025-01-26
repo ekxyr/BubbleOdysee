@@ -1,8 +1,3 @@
-<<<<<<< Updated upstream
-=======
-
-
->>>>>>> Stashed changes
 //Assets/Scripts/Managers/SoundFXManager
 
 //New Game Object SoundFXManager
@@ -33,13 +28,8 @@ public class SoundFXManager : MonoBehaviour
         //spawn in gameObject
         AudioSource audioSource = Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
 
-<<<<<<< Updated upstream
     //assign the audioClip
     audioSource.clip = audioClip;
-=======
-        //assign the audioClip
-        audioSource.clip = audioClip;
->>>>>>> Stashed changes
 
         //assign volume
         audioSource.volume = volume;
@@ -63,13 +53,8 @@ public class SoundFXManager : MonoBehaviour
         //spawn in gameObject
         AudioSource audioSource = Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
 
-<<<<<<< Updated upstream
     //assign the audioClip
     audioSource.clip = audioClip[rand];
-=======
-        //assign the audioClip
-        audioSource.clip = audioClip[rand];
->>>>>>> Stashed changes
 
         //assign volume
         audioSource.volume = volume;
@@ -87,8 +72,4 @@ public class SoundFXManager : MonoBehaviour
 }
 
 //SoundFXObject - Add Audio Source, uncheck Play On Awake ,Then pull it into the Prefabs Folder /Assets/Prefabs
-<<<<<<< Updated upstream
 //Assign the SoundFXObject from the Prefabs to the SoundFXManager Object
-=======
-//Assign the SoundFXObject from the Prefabs to the SoundFXManager Object
->>>>>>> Stashed changes
