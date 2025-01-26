@@ -1,6 +1,10 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< Updated upstream
 --- !u!1 &5872433971093930433
+=======
+--- !u!1 &4554222638330675052
+>>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +12,13 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< Updated upstream
   - component: {fileID: 5096861269067548128}
   - component: {fileID: 5619790058089341631}
+=======
+  - component: {fileID: 305166016929981248}
+  - component: {fileID: 394390087089651437}
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: SoundFXObject
   m_TagString: Untagged
@@ -17,34 +26,57 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< Updated upstream
 --- !u!4 &5096861269067548128
+=======
+--- !u!4 &305166016929981248
+>>>>>>> Stashed changes
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 5872433971093930433}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.939229, y: 8.339896, z: 2.2172945}
+=======
+  m_GameObject: {fileID: 4554222638330675052}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+>>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!82 &5619790058089341631
+=======
+--- !u!82 &394390087089651437
+>>>>>>> Stashed changes
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 5872433971093930433}
+=======
+  m_GameObject: {fileID: 4554222638330675052}
+>>>>>>> Stashed changes
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
+<<<<<<< Updated upstream
   m_PlayOnAwake: 1
+=======
+  m_PlayOnAwake: 0
+>>>>>>> Stashed changes
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

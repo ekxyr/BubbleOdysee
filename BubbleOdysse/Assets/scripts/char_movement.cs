@@ -17,6 +17,14 @@ public class char_movement : MonoBehaviour
     private CharacterController controller;
     [SerializeField] private GameObject bubble;
 
+    //SoundFX
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip dashSound;
+    [SerializeField] private AudioClip floatSound;
+    [SerializeField] private AudioClip plopSound;
+    [SerializeField] private AudioClip hitSound;
+    [SerializeField] private AudioClip[] runSounds;
+
 
     [Header("Movement Variables")]
     private Vector2 moveInput;
@@ -64,6 +72,7 @@ public class char_movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+<<<<<<< Updated upstream
         isColliding = false; //check if colliding
         ApplyRotate();
         ApplyGravity();
@@ -75,11 +84,26 @@ public class char_movement : MonoBehaviour
 
         
         //IsGrounded();
+=======
+        Move();
+        GroundCheck();
+    }
+
+    private void Move()
+    {
+ 
+        Vector3 moveVelocity = (cam.transform.right * moveInput.x + cam.transform.forward * moveInput.y + Vector3.down) * Time.deltaTime * moveSpeed;
+        controller.Move(moveVelocity);
+        moveVelocity.y = 0;
+        Rotate(moveVelocity);
+
+>>>>>>> Stashed changes
     }
 
     public void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+<<<<<<< Updated upstream
         moveDirection  = new Vector3(moveInput.x, 0, moveInput.y);
         animator.SetBool("IsRunning", true);
         SoundFXManager.instance.PlayRandomSoundFXClip(runSound, transform, 1f);
@@ -87,6 +111,10 @@ public class char_movement : MonoBehaviour
         {
             animator.SetBool("IsRunning", false);
         }
+=======
+        SoundFXManager.instance.PlayRandomSoundFXClip(runSounds, transform, 1f);
+
+>>>>>>> Stashed changes
     }
 
     private void ApplyRotate()
@@ -165,10 +193,18 @@ public class char_movement : MonoBehaviour
     
     public void Jump(InputAction.CallbackContext context){
         //Lets the player jump normally
+<<<<<<< Updated upstream
         
         if(!context.performed) return;
         
         if(!IsGrounded()) return;   
+=======
+        if(isGrounded){
+            controller.Move(Vector3.up * jumpForce * Time.deltaTime);
+            //Sound
+            SoundFXManager.instance.PlaySoundFXClip(jumpSound, transform, 1f );
+        }
+>>>>>>> Stashed changes
 
         velocity += jumpForce;
         
@@ -176,6 +212,7 @@ public class char_movement : MonoBehaviour
     }
 
     private void Floating(){
+<<<<<<< Updated upstream
         // Lets the player toggle floating mode wich gives him the current height +2 and stay there until he toggles it off
 
        if(!isFloating){
@@ -199,16 +236,32 @@ public class char_movement : MonoBehaviour
         
 
         
+=======
+        // Lets the player float in the air while holding spacbar and move slowly in the air
+        print("Floating");
+        //Sound
+        SoundFXManager.instance.PlaySoundFXClip(floatSound, transform, 1f);
+>>>>>>> Stashed changes
     }
 
     private void Dash(){
         
         //Lets the player dash in the direction he is facing
+<<<<<<< Updated upstream
         if(IsGrounded()){
             controller.Move(transform.forward * dashForce * Time.deltaTime);
             SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
         }
         
+=======
+        controller.Move(transform.forward * dashForce * Time.deltaTime);
+
+        print("Dashing");
+
+        //Sound
+        SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
+
+>>>>>>> Stashed changes
 
     }
 
