@@ -7,7 +7,7 @@ using UnityEngine.Animations;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
-using System;
+
 
 public class char_movement : MonoBehaviour
 {
@@ -16,12 +16,6 @@ public class char_movement : MonoBehaviour
     [SerializeField] private Camera cam;
     private CharacterController controller;
     [SerializeField] private GameObject bubble;
-    [SerializeField] GameObject _gameOver;
-    [SerializeField] GameObject _youWon;
-    [SerializeField] GameObject _HideMouse;
-    [SerializeField] GameObject _ShowMouse;
-    Boolean over = false;
-    Boolean win = false;
 
 
     [Header("Movement Variables")]
@@ -30,7 +24,6 @@ public class char_movement : MonoBehaviour
     [SerializeField] private float dashForce;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float initialJumpForce;
-    [SerializeField] private float smoothTime = 0.05f;
     private float jumpForce;
 
     private int countScore = 0;
@@ -49,7 +42,8 @@ public class char_movement : MonoBehaviour
     [SerializeField] private AudioClip[] runSound;
 
     private float gravity = -9.81f;
-    [SerializeField] private float gravityMultiplier = 3f;
+    [SerializeField] private float baseGravityMultiplier = 1f;
+    private float gravityMultiplier;
     private float velocity;
 
     bool isFloating = false;
@@ -62,7 +56,9 @@ public class char_movement : MonoBehaviour
         
         controller = GetComponent<CharacterController>();
         jumpForce = initialJumpForce;
-        
+        gravityMultiplier = baseGravityMultiplier;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -73,6 +69,8 @@ public class char_movement : MonoBehaviour
         ApplyGravity();
         
         ApplyMove();
+
+        if(IsGrounded() && isFloating) Floating();
         
 
         
@@ -137,12 +135,13 @@ public class char_movement : MonoBehaviour
             moveSpeed = 10;
             }
             else if(mode == 1){
-            moveSpeed = 3;
+            moveSpeed = 10;
             }
             else if(mode == 2){
-            moveSpeed = 5;
+            moveSpeed = 10;
             }    
         } 
+        gravityMultiplier = baseGravityMultiplier;
           
 
     }
@@ -180,20 +179,21 @@ public class char_movement : MonoBehaviour
         // Lets the player toggle floating mode wich gives him the current height +2 and stay there until he toggles it off
 
        if(!isFloating){
-        if(!IsGrounded()){
-            gravityMultiplier = 0.1f;
+        
+            gravityMultiplier = 0.01f;
+            jumpForce = 0f;
             isFloating = true;
-            
-            print("FloatingOn");
+            controller.Move(Vector3.up * jumpForce * Time.deltaTime);
 
                 //Sound
                 SoundFXManager.instance.PlaySoundFXClip(floatSound, transform, 1f);
-            } 
+            
        }
         else {
             isFloating = false;
-            gravityMultiplier = 3f;
-            print("FloatingOff");
+            gravityMultiplier = baseGravityMultiplier;
+            jumpForce = initialJumpForce;
+            
 
        }
         
@@ -204,8 +204,11 @@ public class char_movement : MonoBehaviour
     private void Dash(){
         
         //Lets the player dash in the direction he is facing
-        controller.Move(transform.forward * dashForce * Time.deltaTime);
-        SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
+        if(IsGrounded()){
+            controller.Move(transform.forward * dashForce * Time.deltaTime);
+            SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
+        }
+        
 
     }
 
@@ -268,13 +271,6 @@ public class char_movement : MonoBehaviour
         else if (hit.gameObject.CompareTag("EndBox") && WorldScript.collectedCoins >= 4)
         {
             print("YOU HAVE WON!!!!");
-            win = true;
-            if (win == true)
-            {
-                _HideMouse.SetActive(false);
-                _ShowMouse.SetActive(true);
-                _youWon.SetActive(true);
-            }
         }
         
     }
@@ -282,13 +278,6 @@ public class char_movement : MonoBehaviour
     public void GameOver(){
             //End the game and show the score
             SoundFXManager.instance.PlaySoundFXClip(hitSound, transform, 1f);
-        over = true;
-        if (over == true)
-        {
-            _HideMouse.SetActive(false);
-            _ShowMouse.SetActive(true);
-            _gameOver.SetActive(true);
-        }
-        print("Game Over");
+            print("Game Over");
     }
 }
