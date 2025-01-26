@@ -189,6 +189,7 @@ public class char_movement : MonoBehaviour
             else if(mode == 2){
                 
                 SummonBubble();
+                animator.SetBool("IsSwinging", false);
             }
         }
     }
@@ -201,7 +202,7 @@ public class char_movement : MonoBehaviour
         if(!IsGrounded()) return;   
 
         velocity += jumpForce;
-        
+        animator.SetBool("IsJumping",true);
         SoundFXManager.instance.PlaySoundFXClip(jumpSound, transform, 1f);
 
     }
@@ -213,7 +214,7 @@ public class char_movement : MonoBehaviour
         if(!IsGrounded()){
                 gravityMultiplier = 0.03f;
                 isFloating = true;
-
+                animator.SetBool("IsFloating", true);
                 velocity = 0;
                 //Sound
                 SoundFXManager.instance.PlaySoundFXClip(floatSound, transform, 1f);
@@ -240,7 +241,14 @@ public class char_movement : MonoBehaviour
     }
 
     private void SummonBubble(){
+<<<<<<< Updated upstream
       
+=======
+
+        print("Summoning Bubble");
+
+        animator.SetBool("IsSwinging", true);
+>>>>>>> Stashed changes
         //Summon the bubble in front of the player
         bubble.transform.position = transform.position + transform.forward * 2;
         bubble.SetActive(true);
@@ -250,10 +258,11 @@ public class char_movement : MonoBehaviour
         //Sound
         SoundFXManager.instance.PlaySoundFXClip(swingSound, transform, 1f);
 
-
+        animator.SetBool("IsSwinging", false);
     }
 
     private bool IsGrounded(){
+        animator.SetBool("IsJumping", false);
         return controller.isGrounded;
     }
 
