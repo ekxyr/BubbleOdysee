@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ground
+  m_Name: Drit Alternate
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 2100000, guid: 2e04ad95d2cdc8f4c9dda4add39c7041, type: 2}
   m_ModifiedSerializedProperties: 16
@@ -46,8 +46,8 @@ Material:
     - _Smoothness: 0.072
     - _WorkflowMode: 0
     m_Colors:
-    - _BaseColor: {r: 0.14929688, g: 0.5188679, b: 0.20209272, a: 1}
-    - _Color: {r: 0.14929685, g: 0.51886785, b: 0.20209268, a: 1}
+    - _BaseColor: {r: 0.6886792, g: 0.5596951, b: 0.25013348, a: 1}
+    - _Color: {r: 0.6886792, g: 0.55969507, b: 0.25013345, a: 1}
     - _SpecColor: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -32,7 +32,6 @@ public class char_movement : MonoBehaviour
     [SerializeField] private float initialJumpForce;
     private float jumpForce;
 
-    private int countScore = 0;
 
 
     //ANIMATION
@@ -159,12 +158,15 @@ public class char_movement : MonoBehaviour
             mode = (mode + 1) % 3;
             if(mode == 0){
             moveSpeed = 7;
+            print("Mode: Dash");
             }
             else if(mode == 1){
             moveSpeed = 6;
+            print("Mode: Floating");
             }
             else if(mode == 2){
             moveSpeed = 6;
+            print("Mode: Summon Bounce Bubble");
             }    
         } 
           
@@ -177,12 +179,15 @@ public class char_movement : MonoBehaviour
         if(context.performed){
             //Check which mode is active and call the corresponding function
             if(mode == 0){
+                
                 Dash();
             }
             else if(mode == 1){
+                
                 Floating();
             }
             else if(mode == 2){
+                
                 SummonBubble();
             }
         }
@@ -206,7 +211,7 @@ public class char_movement : MonoBehaviour
 
        if(!isFloating){
         if(!IsGrounded()){
-                gravityMultiplier = 0.05f;
+                gravityMultiplier = 0.03f;
                 isFloating = true;
 
                 velocity = 0;
@@ -218,7 +223,7 @@ public class char_movement : MonoBehaviour
             isFloating = false;
             animator.SetBool("IsFloating", false);
             gravityMultiplier = initialGravityMultiplier;
-            print("FloatingOff");
+            
 
        }        
     }
@@ -235,10 +240,7 @@ public class char_movement : MonoBehaviour
     }
 
     private void SummonBubble(){
-
-        print("Summoning Bubble");
-
-        
+      
         //Summon the bubble in front of the player
         bubble.transform.position = transform.position + transform.forward * 2;
         bubble.SetActive(true);
@@ -264,7 +266,7 @@ public class char_movement : MonoBehaviour
             SoundFXManager.instance.PlaySoundFXClip(plopSound, transform, 1f);
             
             bubble.SetActive(false);
-            velocity = jumpForce * 2;
+            velocity = jumpForce * 1.7f;
         }
         
         
